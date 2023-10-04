@@ -4,7 +4,6 @@ import { PrismaModule } from 'nestjs-prisma';
 import { UsersController } from './users.controller';
 import { AppService } from '../src/app.service';
 
-
 @Module({
   imports: [PrismaModule],
   controllers: [UsersController],
