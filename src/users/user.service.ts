@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { PrismaService } from 'nestjs-prisma';
 import { CreateUserDto } from './dto/create-user.dto';
-import { AppService } from '../../app.service';
+import { AppService } from '../app.service';
 
 @Injectable()
 export class UserService {
