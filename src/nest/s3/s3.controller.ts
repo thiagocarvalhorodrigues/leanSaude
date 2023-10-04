@@ -1,0 +1,31 @@
+import {
+  Controller,
+  Post,
+  UseInterceptors,
+  UploadedFile,
+  UploadedFiles,
+} from '@nestjs/common';
+
+import {
+  FileFieldsInterceptor,
+  FileInterceptor,
+} from '@nestjs/platform-express';
+import multerConfig from './s3.config';
+
+@Controller('file')
+export class S3Controller {
+  @Post()
+  @UseInterceptors(FileInterceptor('files', multerConfig))
+  uploadAfiles(@UploadedFile() file: Express.MulterS3.File) {
+    console.log('File saved successfully', file);
+  }
+
+  @Post('files')
+  @UseInterceptors(FileFieldsInterceptor([{ name: 'files' }], multerConfig))
+  async uploadMultipleFiles(
+    @UploadedFiles()
+    files: Express.MulterS3.File[],
+  ) {
+    console.log('Multiples files saved successfully', files['files']);
+  }
+}
