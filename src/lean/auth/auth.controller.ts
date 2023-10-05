@@ -1,6 +1,6 @@
 import { JwtGuard } from './jwt.guard';
 import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { AuthService } from './auth.service.keycloak';
 
 @Controller()
 export class AuthController {
@@ -8,7 +8,7 @@ export class AuthController {
 
   @Post('login')
   login(@Body() body) {
-    console.log('thiago');
+    console.log('Rota de login');
     return this.authService.login(body.username, body.password);
   }
 

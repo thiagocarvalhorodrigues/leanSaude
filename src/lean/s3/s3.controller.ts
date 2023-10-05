@@ -12,9 +12,9 @@ import {
 } from '@nestjs/platform-express';
 import multerConfig from './s3.config';
 
-@Controller('file')
+@Controller()
 export class S3Controller {
-  @Post()
+  @Post('file')
   @UseInterceptors(FileInterceptor('files', multerConfig))
   uploadAfiles(@UploadedFile() file: Express.MulterS3.File) {
     console.log('File saved successfully', file);

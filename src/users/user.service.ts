@@ -1,21 +1,19 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
-
 import { PrismaService } from 'nestjs-prisma';
 import { CreateUserDto } from './dto/create-user.dto';
-import { AppService } from '../app.service';
+import UserVerificationError from '../lean/util/UserVerificationError';
 
 @Injectable()
 export class UserService {
   private confirmationKey: string;
   private email: string;
-  constructor(
-    private readonly appService: AppService,
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
-  public async create(createUserDto: CreateUserDto) {
+  public async create(
+    createUserDto: CreateUserDto,
+  ): Promise<HttpException | Record<string, number>> {
     const data = {
       ...createUserDto,
       confirmation_key: uuidv4(),
@@ -28,7 +26,7 @@ export class UserService {
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,
-          error: 'Erro no cadastro do usuário',
+          error: UserVerificationError.ErrorInUserRegistration,
         },
         HttpStatus.BAD_REQUEST,
         {
@@ -42,10 +40,22 @@ export class UserService {
     };
   }
 
-  public async getConfirmationKey() {
+  public async getAllUsers(): Promise<HttpException | any> {
+    return this.prisma.user.findMany().catch(async (error) => {
+      this.httpErrorFindUser(error);
+    });
+  }
+
+  public findByEmail(email: string): Record<string, any> {
+    return this.prisma.user.findUnique({
+      where: { email },
+    });
+  }
+
+  public async getConfirmationKey(): Promise<string> {
     return this.confirmationKey;
   }
-  public async getEmail() {
+  public async getEmail(): Promise<string> {
     return this.email;
   }
 
@@ -66,16 +76,23 @@ export class UserService {
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,
-          error: 'E-mail já cadastrado',
+          error: UserVerificationError.EmailAlreadyRegistered,
         },
         HttpStatus.BAD_REQUEST,
       );
     }
   }
 
-  findByEmail(email: string) {
-    return this.prisma.user.findUnique({
-      where: { email },
-    });
+  private async httpErrorFindUser(error: any): Promise<HttpException> {
+    throw new HttpException(
+      {
+        status: HttpStatus.BAD_REQUEST,
+        error: UserVerificationError.ErrorFindUser,
+      },
+      HttpStatus.INTERNAL_SERVER_ERROR,
+      {
+        cause: error,
+      },
+    );
   }
 }
