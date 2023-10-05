@@ -1,3 +1,5 @@
+![image](https://github.com/thiagocarvalhorodrigues/leanSaude/assets/23345809/53ee0d43-364f-4e82-8921-34f062f452e8)
+
 # Lean Saúde
 **Uma Nova Forma de Fazer Gestão de Saúde**
 
