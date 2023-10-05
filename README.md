@@ -1,7 +1,10 @@
 # Lean Saúde
-<https://www.leansaude.com.br/>
+**Uma Nova Forma de Fazer Gestão de Saúde**
 
+## Agradecimentos...
 
+**Quero agradecer principalmente ao Vinícios por dar a oportunidade de estar desenvolendo esse teste, e onde me agregou muito valor
+Muito obrigado** 
 
 ## Instruções...
 
