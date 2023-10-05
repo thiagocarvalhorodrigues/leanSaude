@@ -3,10 +3,9 @@
 # Lean Saúde
 **Uma Nova Forma de Fazer Gestão de Saúde**
 
-## Agradecimentos...
+##  :v: Agradecimentos :relieved:
 
-**Quero agradecer principalmente ao Vinícios por dar a oportunidade de estar desenvolendo esse teste, e onde me agregou muito valor
-Muito obrigado** 
+**Quero agradecer principalmente ao Vinícios por dar a oportunidade de estar desenvolendo esse teste, a onde me agregou muito valor. Muito obrigado** 
 
 ## Instruções...
 
@@ -114,3 +113,6 @@ Envia múltiplos arquivos
 **Endpoint**: ```/files```
 
 **Method**: ```POST```
+
+## :tada: Muito obrigado, espero que gostem :airplane:
+
