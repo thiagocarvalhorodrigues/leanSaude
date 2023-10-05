@@ -13,7 +13,7 @@ export class UserService {
 
   public async create(
     createUserDto: CreateUserDto,
-  ): Promise<HttpException | Record<string, number>> {
+  ): Promise<HttpException | Record<string, number> | void> {
     const data = {
       ...createUserDto,
       confirmation_key: uuidv4(),
@@ -34,10 +34,6 @@ export class UserService {
         },
       );
     });
-
-    return {
-      status: HttpStatus.CREATED,
-    };
   }
 
   public async getAllUsers(): Promise<HttpException | any> {

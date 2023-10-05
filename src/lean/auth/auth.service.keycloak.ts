@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpService) {}
 
-  async login(username: string, password: string) {
+  async login(username: string, password: string): Promise<string> {
     const { data } = await firstValueFrom(
       this.http.post(
         process.env.AUTHSERVERURL,

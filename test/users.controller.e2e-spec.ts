@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
+import { AxiosResponse } from 'axios';
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication;
@@ -30,11 +31,16 @@ describe('UsersController (e2e)', () => {
   });
 
   it('should return a 500 status code when there is an error in the user service', async () => {
-    const userService = app.get('UserService');
-    jest.spyOn(userService, 'getAllUsers').mockImplementation(() => {
-      throw new Error('Internal Server Error');
-    });
+    const result: AxiosResponse = {
+      data: {},
+      status: 500,
+      headers: {},
+      statusText: '',
+      config: null,
+    };
 
+    const userService = app.get('UserService');
+    jest.spyOn(userService, 'getAllUsers').mockImplementationOnce(() => result);
     const response = await request(app.getHttpServer()).get('/users');
     expect(response.status).toBe(500);
   });
