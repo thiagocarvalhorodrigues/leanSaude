@@ -25,10 +25,11 @@ obs: Irá iniciar o banco de dados postgres e keycloak.
 Caso de fato deseja subir a aplicação completa, ajustar as configs do keycloak, bando de dados e S3.
 ```
 ##  Observação
+![image](https://github.com/thiagocarvalhorodrigues/leanSaude/assets/23345809/78362b53-6892-476c-a7e1-250aee7d43aa)
 ```
 Existem 3 minis projetos distintos dentro do diretório ./SRC, irei descrever cada um abaixo.
 
-CORE: Aqui realizei um projeto com o core de uma aplicação de cadastro de usuário de acordo com DDD.
+CORE: Aqui realizei um projeto de uma aplicação de cadastro de usuário apenas para demonstrar a arquitetura com DDD .
 LEAN: Projeto realizado a fim do teste aplicado pelo Vinícius.
 USERS: Um mini projeto pessoal para cadastro de usuários, aonde existem algumas validações para cadastro do usuário e persistência no banco de dados.
 ```
